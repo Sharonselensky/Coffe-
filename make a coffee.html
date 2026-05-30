@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brew Better Coffee - Beginner's Guide to Coffee Brewing</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --coffee-dark: #2c1810;
+        --coffee-medium: #6f4e37;
+        --coffee-light: #a67c52;
+        --cream: #f5e6d3;
+        --latte: #d4a574;
+        --espresso: #3e2723;
+    }
+    
+    * {
+        scroll-behavior: smooth;
+    }
+    
+    body {
+        font-family: 'Outfit', sans-serif;
+        background-color: #faf8f5;
+        color: var(--coffee-dark);
+    }
+    
+    .heading-font {
+        font-family: 'Playfair Display', serif;
+    }
+    
+    .hero-bg {
+        background: linear-gradient(135deg, rgba(44, 24, 16, 0.85) 0%, rgba(111, 78, 55, 0.75) 100%), 
+                    url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=2070') center/cover;
+    }
+    
+    .card-hover {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(44, 24, 16, 0.15);
+    }
+    
+    .nav-link {
+        position: relative;
+        transition: color 0.3s ease;
+    }
+    
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--latte);
+        transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+        width: 100%;
+    }
+    
+    .step-number {
+        background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));
+    }
+    
+    .gradient-text {
+        background: linear-gradient(135deg, var(--coffee-medium), var(--latte));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    
+    .method-tab.active {
+        background: var(--coffee-medium);
+        color: white;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .animate-fade-in {
+        animation: fadeInUp 0.6s ease-out forwards;
+    }
+    
+    .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out;
+    }
+    
+    .accordion-content.active {
+        max-height: 500px;
+    }
+</style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-mug-hot text-2xl" style="color: var(--coffee-medium);"></i>
+                    <span class="text-xl font-bold heading-font" style="color: var(--coffee-dark);">BrewBetter</span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#intro" class="nav-link text-sm font-medium" style="color: var(--coffee-dark);">Intro</a>
+                    <a href="#equipment" class="nav-link text-sm font-medium" style="color: var(--coffee-dark);">Equipment</a>
+                    <a href="#methods" class="nav-link text-sm font-medium" style="color: var(--coffee-dark);">Methods</a>
+                    <a href="#tips" class="nav-link text-sm font-medium" style="color: var(--coffee-dark);">Tips</a>
+                    <a href="#mistakes" class="nav-link text-sm font-medium" style="color: var(--coffee-dark);">Mistakes</a>
+                </div>
+                
+                <button id="mobile-menu-btn" class="md:hidden text-2xl" style="color: var(--coffee-dark);">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-3 space-y-3">
+                <a href="#intro" class="block py-2 text-sm font-medium" style="color: var(--coffee-dark);">Intro</a>
+                <a href="#equipment" class="block py-2 text-sm font-medium" style="color: var(--coffee-dark);">Equipment</a>
+                <a href="#methods" class="block py-2 text-sm font-medium" style="color: var(--coffee-dark);">Methods</a>
+                <a href="#tips" class="block py-2 text-sm font-medium" style="color: var(--coffee-dark);">Tips</a>
+                <a href="#mistakes" class="block py-2 text-sm font-medium" style="color: var(--coffee-dark);">Mistakes</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center text-white pt-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="heading-font text-5xl md:text-7xl font-bold mb-6 animate-fade-in">
+                Brew Better Coffee at Home
+            </h1>
+            <p class="text-lg md:text-xl mb-8 text-gray-100 max-w-2xl mx-auto animate-fade-in" style="animation-delay: 0.2s;">
+                Master the art of coffee brewing with simple, step-by-step guides for beginners. From French press to espresso, learn how to make cafe-quality coffee in your kitchen.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in" style="animation-delay: 0.4s;">
+                <a href="#methods" class="px-8 py-4 rounded-full font-semibold text-white transition-all hover:scale-105" style="background: var(--coffee-medium);">
+                    Start Brewing <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+                <a href="#intro" class="px-8 py-4 rounded-full font-semibold bg-white/10 backdrop-blur-sm border-2 border-white transition-all hover:bg-white/20">
+                    Learn the Basics
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section id="intro" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-sm font-semibold tracking-wider uppercase" style="color: var(--coffee-light);">Welcome</span>
+                    <h2 class="heading-font text-4xl md:text-5xl font-bold mt-4 mb-6" style="color: var(--coffee-dark);">
+                        Introduction to <span class="gradient-text">Coffee Brewing</span>
+                    </h2>
+                    <p class="text-lg mb-6" style="color: var(--espresso);">
+                        Great coffee isn’t about expensive machines — it’s about understanding the fundamentals. The perfect cup comes down to four key elements:
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--cream);">
+                                <i class="fa-solid fa-seedling" style="color: var(--coffee-medium);"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1" style="color: var(--coffee-dark);">Quality Beans</h3>
+                                <p class="text-sm" style="color: var(--espresso);">Fresh, whole beans ground just before brewing make the biggest difference.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--cream);">
+                                <i class="fa-solid fa-temperature-half" style="color: var(--coffee-medium);"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1" style="color: var(--coffee-dark);">Water Temperature</h3>
+                                <p class="text-sm" style="color: var(--espresso);">195-205°F is ideal. Too hot burns the coffee, too cool under-extracts.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--cream);">
+                                <i class="fa-solid fa-scale-balanced" style="color: var(--coffee-medium);"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1" style="color: var(--coffee-dark);">Brew Ratio</h3>
+                                <p class="text-sm" style="color: var(--espresso);">Start with 1:16 — 1g coffee to 16g water. Adjust to taste.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center" style="background: var(--cream);">
+                                <i class="fa-solid fa-clock" style="color: var(--coffee-medium);"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold mb-1" style="color: var(--coffee-dark);">Brew Time</h3>
+                                <p class="text-sm" style="color: var(--espresso);">Each method has an optimal time. Too fast = weak, too slow = bitter.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=2070" alt="Coffee beans" class="rounded-2xl shadow-2xl">
+                    <div class="absolute -bottom-6 -left-6 p-6 rounded-xl shadow-xl bg-white max-w-xs">
+                        <p class="text-sm font-semibold mb-2" style="color: var(--coffee-dark);">Pro Tip</p>
+                        <p class="text-sm" style="color: var(--espresso);">Buy coffee roasted within the last 2-4 weeks for maximum flavor.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Essential Equipment Section -->
+    <section id="equipment" class="py-20 px-4 sm:px-6 lg:px-8" style="background: var(--cream);">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider uppercase" style="color: var(--coffee-light);">Gear Up</span>
+                <h2 class="heading-font text-4xl md:text-5xl font-bold mt-4 mb-4" style="color: var(--coffee-dark);">
+                    Essential Equipment
+                </h2>
+                <p class="text-lg max-w-2xl mx-auto" style="color: var(--espresso);">
+                    You don’t need everything at once. Start with the basics and upgrade as you explore.
+                </p>
+            </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 rounded-xl mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                        <i class="fa-solid fa-spoon text-xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 heading-font" style="color: var(--coffee-dark);">Coffee Grinder</h3>
+                    <p class="text-sm mb-4" style="color: var(--espresso);">Burr grinders give consistent grind size. Blade grinders work for beginners on a budget.</p>
+                    <div class="text-xs font-semibold px-3 py-1 rounded-full inline-block" style="background: var(--cream); color: var(--coffee-medium);">
+                        Priority: High
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 rounded-xl mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                        <i class="fa-solid fa-scale-unbalanced text-xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 heading-font" style="color: var(--coffee-dark);">Kitchen Scale</h3>
+                    <p class="text-sm mb-4" style="color: var(--espresso);">Measuring by weight beats volume. A $15 scale improves consistency dramatically.</p>
+                    <div class="text-xs font-semibold px-3 py-1 rounded-full inline-block" style="background: var(--cream); color: var(--coffee-medium);">
+                        Priority: High
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 rounded-xl mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                        <i class="fa-solid fa-fire-flame-simple text-xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 heading-font" style="color: var(--coffee-dark);">Kettle</h3>
+                    <p class="text-sm mb-4" style="color: var(--espresso);">Gooseneck kettles give pour control. Electric with temp control is ideal for pour-over.</p>
+                    <div class="text-xs font-semibold px-3 py-1 rounded-full inline-block" style="background: var(--cream); color: var(--coffee-medium);">
+                        Priority: Medium
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 rounded-xl mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                        <i class="fa-solid fa-filter text-xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 heading-font" style="color: var(--coffee-dark);">Brewer</h3>
+                    <p class="text-sm mb-4" style="color: var(--espresso);">French press, V60, Aeropress, or espresso machine. Choose based on your taste preference.</p>
+                    <div class="text-xs font-semibold px-3 py-1 rounded-full inline-block" style="background: var(--cream); color: var(--coffee-medium);">
+                        Priority: High
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 rounded-xl mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                        <i class="fa-solid fa-thermometer text-xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 heading-font" style="color: var(--coffee-dark);">Thermometer</h3>
+                    <p class="text-sm mb-4" style="color: var(--espresso);">If your kettle doesn’t show temp, a simple probe thermometer ensures 195-205°F water.</p>
+                    <div class="text-xs font-semibold px-3 py-1 rounded-full inline-block" style="background: var(--cream); color: var(--coffee-medium);">
+                        Priority: Low
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 card-hover">
+                    <div class="w-14 h-14 rounded-xl mb-4 flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                        <i class="fa-solid fa-clock text-xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 heading-font" style="color: var(--coffee-dark);">Timer</h3>
+                    <p class="text-sm mb-4" style="color: var(--espresso);">Your phone works fine. Precise brew time prevents over or under-extraction.</p>
+                    <div class="text-xs font-semibold px-3 py-1 rounded-full inline-block" style="background: var(--cream); color: var(--coffee-medium);">
+                        Priority: Low
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brewing Methods Section -->
+    <section id="methods" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-sm font-semibold tracking-wider uppercase" style="color: var(--coffee-light);">Brew Guides</span>
+                <h2 class="heading-font text-4xl md:text-5xl font-bold mt-4 mb-4" style="color: var(--coffee-dark);">
+                    Popular Brewing Methods
+                </h2>
+                <p class="text-lg max-w-2xl mx-auto" style="color: var(--espresso);">
+                    Each method brings out different flavors. Pick one to start, then experiment.
+                </p>
+            </div>
+
+            <!-- Method Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-12">
+                <button class="method-tab px-6 py-3 rounded-full font-medium transition-all active" data-method="frenchpress" style="border: 2px solid var(--coffee-medium); color: var(--coffee-medium);">
+                    French Press
+                </button>
+                <button class="method-tab px-6 py-3 rounded-full font-medium transition-all" data-method="pourover" style="border: 2px solid var(--coffee-medium); color: var(--coffee-medium);">
+                    Pour Over
+                </button>
+                <button class="method-tab px-6 py-3 rounded-full font-medium transition-all" data-method="espresso" style="border: 2px solid var(--coffee-medium); color: var(--coffee-medium);">
+                    Espresso
+                </button>
+                <button class="method-tab px-6 py-3 rounded-full font-medium transition-all" data-method="instant" style="border: 2px solid var(--coffee-medium); color: var(--coffee-medium);">
+                    Instant Coffee
+                </button>
+            </div>
+
+            <!-- French Press Content -->
+            <div class="method-content" id="frenchpress-content">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+                    <div class="grid md:grid-cols-2 gap-0">
+                        <div class="p-8 md:p-12">
+                            <div class="flex items-center gap-3 mb-6">
+                                <i class="fa-solid fa-mug-hot text-3xl" style="color: var(--coffee-medium);"></i>
+                                <h3 class="heading-font text-3xl font-bold" style="color: var(--coffee-dark);">French Press</h3>
+                            </div>
+                            <p class="mb-6" style="color: var(--espresso);">Full-bodied, rich coffee with natural oils. Most forgiving method for beginners.</p>
+                            
+                            <div class="mb-6 p-4 rounded-xl" style="background: var(--cream);">
+                                <h4 class="font-semibold mb-2" style="color: var(--coffee-dark);">Ingredients (1 serving)</h4>
+                                <ul class="text-sm space-y-1" style="color: var(--espresso);">
+                                    <li>• 30g coarse ground coffee</li>
+                                    <li>• 500ml water at 200°F</li>
+                                </ul>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Preheat & Add Coffee</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Rinse press with hot water. Add coarse grounds to empty press.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Bloom</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Pour 60ml water, stir gently, wait 30 seconds.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">3</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Fill & Steep</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Add rest of water. Place lid on, don't plunge. Wait 4 minutes.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">4</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Plunge & Serve</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Press plunger down slowly. Serve immediately to avoid over-extraction.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative min-h-[400px]" style="background: url('https://images.unsplash.com/photo-1565452344518-47faca79dc1d?q=80&w=2070') center/cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pour Over Content -->
+            <div class="method-content hidden" id="pourover-content">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+                    <div class="grid md:grid-cols-2 gap-0">
+                        <div class="p-8 md:p-12">
+                            <div class="flex items-center gap-3 mb-6">
+                                <i class="fa-solid fa-faucet-drip text-3xl" style="color: var(--coffee-medium);"></i>
+                                <h3 class="heading-font text-3xl font-bold" style="color: var(--coffee-dark);">Pour Over</h3>
+                            </div>
+                            <p class="mb-6" style="color: var(--espresso);">Clean, bright cup that highlights complex flavors. V60 or Chemex methods.</p>
+                            
+                            <div class="mb-6 p-4 rounded-xl" style="background: var(--cream);">
+                                <h4 class="font-semibold mb-2" style="color: var(--coffee-dark);">Ingredients (1 serving)</h4>
+                                <ul class="text-sm space-y-1" style="color: var(--espresso);">
+                                    <li>• 20g medium-fine ground coffee</li>
+                                    <li>• 320ml water at 205°F</li>
+                                </ul>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Rinse Filter</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Place filter in dripper. Rinse with hot water to remove paper taste.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Add Coffee & Bloom</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Add grounds. Pour 40ml water in circles. Wait 45 seconds.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">3</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Main Pour</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Pour remaining water slowly in spirals up to 320ml total.</p>
+                                    </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">4</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Drain & Enjoy</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Total brew time: 2:30-3:30. Swirl and serve.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative min-h-[400px]" style="background: url('https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=2087') center/cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Espresso Content -->
+            <div class="method-content hidden" id="espresso-content">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+                    <div class="grid md:grid-cols-2 gap-0">
+                        <div class="p-8 md:p-12">
+                            <div class="flex items-center gap-3 mb-6">
+                                <i class="fa-solid fa-bolt text-3xl" style="color: var(--coffee-medium);"></i>
+                                <h3 class="heading-font text-3xl font-bold" style="color: var(--coffee-dark);">Espresso</h3>
+                            </div>
+                            <p class="mb-6" style="color: var(--espresso);">Concentrated, intense shot with crema. Base for lattes, cappuccinos, and Americanos.</p>
+                            
+                            <div class="mb-6 p-4 rounded-xl" style="background: var(--cream);">
+                                <h4 class="font-semibold mb-2" style="color: var(--coffee-dark);">Ingredients (Double Shot)</h4>
+                                <ul class="text-sm space-y-1" style="color: var(--espresso);">
+                                    <li>• 18g fine ground coffee</li>
+                                    <li>• 36g espresso yield</li>
+                                </ul>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Grind & Dose</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Grind fine like table salt. Add 18g to portafilter.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Distribute & Tamp</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Level grounds. Tamp with 30lbs pressure, keep flat.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">3</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Extract</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Lock in portafilter. Start shot. Target 25-30 seconds for 36g out.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">4</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Dial In</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Too fast = coarser grind. Too slow = finer grind. Aim for balance.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative min-h-[400px]" style="background: url('https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?q=80&w=2070') center/cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instant Content -->
+            <div class="method-content hidden" id="instant-content">
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+                    <div class="grid md:grid-cols-2 gap-0">
+                        <div class="p-8 md:p-12">
+                            <div class="flex items-center gap-3 mb-6">
+                                <i class="fa-solid fa-bolt-lightning text-3xl" style="color: var(--coffee-medium);"></i>
+                                <h3 class="heading-font text-3xl font-bold" style="color: var(--coffee-dark);">Instant Coffee</h3>
+                            </div>
+                            <p class="mb-6" style="color: var(--espresso);">Quick and convenient. With the right technique, instant can actually taste good.</p>
+                            
+                            <div class="mb-6 p-4 rounded-xl" style="background: var(--cream);">
+                                <h4 class="font-semibold mb-2" style="color: var(--coffee-dark);">Ingredients (1 serving)</h4>
+                                <ul class="text-sm space-y-1" style="color: var(--espresso);">
+                                    <li>• 2g instant coffee (1 heaped tsp)</li>
+                                    <li>• 200ml water</li>
+                                </ul>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">1</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Don't Use Boiling Water</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Let water cool to 185°F. Boiling water burns instant and makes it bitter.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">2</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Create a Paste</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Mix coffee with 2 tbsp cold water first. Dissolves better, less bitter.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">3</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Add Hot Water</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Pour remaining hot water slowly while stirring.</p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-4">
+                                    <div class="step-number flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">4</div>
+                                    <div>
+                                        <p class="font-semibold" style="color: var(--coffee-dark);">Upgrade It</p>
+                                        <p class="text-sm" style="color: var(--espresso);">Add a pinch of salt, cocoa, or cinnamon. Use milk instead of water.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative min-h-[400px]" style="background: url('https://images.unsplash.com/photo-1535667697402-82c3c1eaa0c2?q=80&w=2070') center/cover;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips Section -->
+    <section id="tips" class="py-20 px-4 sm:px-6 lg:px-8" style="background: var(--cream);">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider uppercase" style="color: var(--coffee-light);">Level Up</span>
+                <h2 class="heading-font text-4xl md:text-5xl font-bold mt-4 mb-4" style="color: var(--coffee-dark);">
+                    Tips for Better Flavor
+                </h2>
+                <p class="text-lg max-w-2xl mx-auto" style="color: var(--espresso);">
+                    Small changes make big differences in your cup.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-2xl p-6 flex gap-4 card-hover">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                            <i class="fa-solid fa-droplet text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2" style="color: var(--coffee-dark);">Use Filtered Water</h3>
+                        <p class="text-sm" style="color: var(--espresso);">Coffee is 98% water. Tap water with chlorine or minerals ruins good beans. Use filtered or bottled.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 flex gap-4 card-hover">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                            <i class="fa-solid fa-box text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2" style="color: var(--coffee-dark);">Store Beans Properly</h3>
+                        <p class="text-sm" style="color: var(--espresso);">Keep in airtight container away from light, heat, and moisture. Don't freeze or refrigerate.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 flex gap-4 card-hover">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                            <i class="fa-solid fa-fire text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2" style="color: var(--coffee-dark);">Preheat Everything</h3>
+                        <p class="text-sm" style="color: var(--espresso);">Rinse your brewer, mug, and filters with hot water first. Maintains stable brew temperature.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 flex gap-4 card-hover">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                            <i class="fa-solid fa-wrench text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2" style="color: var(--coffee-dark);">Adjust One Variable</h3>
+                        <p class="text-sm" style="color: var(--espresso);">If coffee tastes off, change only grind size, ratio, or time. Don't change everything at once.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 flex gap-4 card-hover">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                            <i class="fa-solid fa-calendar text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2" style="color: var(--coffee-dark);">Check Roast Date</h3>
+                        <p class="text-sm" style="color: var(--espresso);">Coffee peaks 7-14 days after roasting. Avoid beans older than 30 days for best flavor.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-6 flex gap-4 card-hover">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, var(--coffee-medium), var(--coffee-light));">
+                            <i class="fa-solid fa-broom text-white"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="font-bold mb-2" style="color: var(--coffee-dark);">Keep Equipment Clean</h3>
+                        <p class="text-sm" style="color: var(--espresso);">Old coffee oils go rancid. Clean grinder monthly and rinse brewers after each use.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Common Mistakes Section -->
+    <section id="mistakes" class="py-20 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-sm font-semibold tracking-wider uppercase" style="color: var(--coffee-light);">Avoid These</span>
+                <h2 class="heading-font text-4xl md:text-5xl font-bold mt-4 mb-4" style="color: var(--coffee-dark);">
+                    Common Mistakes to Avoid
+                </h2>
+                <p class="text-lg max-w-2xl mx-auto" style="color: var(--espresso);">
+                    Learn from these before they ruin your brew.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left transition-colors hover:bg-gray-50">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: #fee; color: #c33;">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                            <span class="font-semibold" style="color: var(--coffee-dark);">Using Boiling Water</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-5 pt-2 ml-14" style="color: var(--espresso);">
+                            <p class="text-sm">Water above 205°F extracts bitter compounds and burns coffee. Let boiling water sit for 30-45 seconds before pouring, or use a thermometer. Ideal range is 195-205°F.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left transition-colors hover:bg-gray-50">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: #fee; color: #c33;">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                            <span class="font-semibold" style="color: var(--coffee-dark);">Wrong Grind Size</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-5 pt-2 ml-14" style="color: var(--espresso);">
+                            <p class="text-sm">Too fine for French press = bitter sludge. Too coarse for espresso = sour, weak shot. Match grind to method: coarse for French press, medium for pour-over, fine for espresso.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left transition-colors hover:bg-gray-50">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: #fee; color: #c33;">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                            <span class="font-semibold" style="color: var(--coffee-dark);">Storing Coffee in the Fridge</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-5 pt-2 ml-14" style="color: var(--espresso);">
+                            <p class="text-sm">Coffee absorbs odors and moisture from the fridge. Condensation forms when you take it out. Store in airtight container in cool, dark cupboard instead.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left transition-colors hover:bg-gray-50">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: #fee; color: #c33;">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                            <span class="font-semibold" style="color: var(--coffee-dark);">Eyeballing Measurements</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-5 pt-2 ml-14" style="color: var(--espresso);">
+                            <p class="text-sm">"A scoop" varies wildly. Inconsistent ratios = inconsistent coffee. A $15 scale ensures you use 1:16 ratio every time. Measure both coffee and water by weight.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left transition-colors hover:bg-gray-50">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: #fee; color: #c33;">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                            <span class="font-semibold" style="color: var(--coffee-dark);">Using Stale Beans</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-5 pt-2 ml-14" style="color: var(--espresso);">
+                            <p class="text-sm">Supermarket beans often sit for months. Coffee loses 70% of flavor compounds after 30 days. Buy from local roasters and check roast dates. Fresher = better.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden">
+                    <button class="accordion-btn w-full px-6 py-5 flex items-center justify-between text-left transition-colors hover:bg-gray-50">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: #fee; color: #c33;">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                            <span class="font-semibold" style="color: var(--coffee-dark);">Not Cleaning Equipment</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down transition-transform"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="px-6 pb-5 pt-2 ml-14" style="color: var(--espresso);">
+                            <p class="text-sm">Coffee oils build up and turn rancid, adding bitter off-flavors. Rinse after each use, deep clean weekly. Clean grinder monthly to remove built-up fines.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8" style="background: linear-gradient(135deg, var(--coffee-dark), var(--coffee-medium));">
+        <div class="max-w-4xl mx-auto text-center text-white">
+            <h2 class="heading-font text-4xl md:text-5xl font-bold mb-6">
+                Ready to Brew Your Best Cup?
+            </h2>
+            <p class="text-lg mb-8 text-gray-200">
+                Start with one method, master it, then explore. Great coffee is a journey of small improvements.
+            </p>
+            <a href="#methods" class="inline-block px-8 py-4 rounded-full font-semibold bg-white transition-all hover:scale-105" style="color: var(--coffee-dark);">
+                Pick Your First Method <i class="fa-solid fa-arrow-down ml-2"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 sm:px-6 lg:px-8" style="background: var(--espresso);">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-mug-hot text-2xl" style="color: var(--latte);"></i>
+                        <span class="text-xl font-bold heading-font text-white">BrewBetter</span>
+                    </div>
+                    <p class="text-sm text-gray-400">Your guide to brewing cafe-quality coffee at home. Simple, practical, and beginner-friendly.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#intro" class="hover:text-white transition-colors">Introduction</a></li>
+                        <li><a href="#equipment" class="hover:text-white transition-colors">Equipment Guide</a></li>
+                        <li><a href="#methods" class="hover:text-white transition-colors">Brewing Methods</a></li>
+                        <li><a href="#tips" class="hover:text-white transition-colors">Flavor Tips</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Resources</h3>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Coffee Bean Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Grind Size Chart</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Brewing Calculator</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 BrewBetter. Made with <i class="fa-solid fa-heart" style="color: var(--latte);"></i> and lots of coffee.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                mobileMenuBtn.querySelector('i').classList.remove('fa-xmark');
+            });
+        });
+
+        // Method tabs
+        const methodTabs = document.querySelectorAll('.method-tab');
+        const methodContents = document.querySelectorAll('.method-content');
+
+        methodTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const method = tab.dataset.method;
+                
+                // Update tabs
+                methodTabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.style.background = 'transparent';
+                    t.style.color = 'var(--coffee-medium)';
+                });
+                tab.classList.add('active');
+                tab.style.background = 'var(--coffee-medium)';
+                tab.style.color = 'white';
+                
+                // Update content
+                methodContents.forEach(content => {
+                    content.classList.add('hidden');
+                });
+                document.getElementById(`${method}-content`).classList.remove('hidden');
+            });
+        });
+
+        // Initialize first tab styling
+        document.querySelector('.method-tab.active').style.background = 'var(--coffee-medium)';
+        document.querySelector('.method-tab.active').style.color = 'white';
+
+        // Accordion
+        const accordionBtns = document.querySelectorAll('.accordion-btn');
+        
+        accordionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('.fa-chevron-down');
+                
+                content.classList.toggle('active');
+                icon.style.transform = content.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+            });
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.style.boxShadow = '0 4px 20px rgba(44, 24, 16, 0.1)';
+            } else {
+                navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.05)';
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll offset for fixed nav
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offset = 80;
+                    const targetPosition = target.offsetTop - offset;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+<script>(function(){document.addEventListener("click",function(e){var a=e.target.closest("[data-product-id]");if(!a)return;e.preventDefault();var pid=a.getAttribute("data-product-id");if(pid)parent.postMessage({type:"ecto-artifact-link-click",productId:pid},"*")})})();</script>
+</body>
+</html>
